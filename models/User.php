@@ -29,9 +29,9 @@ class User extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['lname'], 'string'],
-            [['create_time', 'update_time'], 'integer'],
-            [['fname'], 'string', 'max' => 255]
+            [['fname', 'lname'], 'string', 'required'],
+            [['create_time', 'update_time'], 'integer', 'safe'],
+            [['fname'], 'max' => 255]
         ];
     }
 
@@ -47,5 +47,13 @@ class User extends \yii\db\ActiveRecord
             'create_time' => 'Create Time',
             'update_time' => 'Update Time',
         ];
+    }
+
+    public function behaviors(){
+        return [
+            'timestamp' => [
+                'class' => 'yii\behaviors\AutoTimestamp'
+                ]
+            ];
     }
 }
