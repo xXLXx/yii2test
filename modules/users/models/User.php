@@ -1,8 +1,9 @@
 <?php
 
-namespace app\modules\users\models;
+namespace modules\users\models;
 
 use Yii;
+use \yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "users".
@@ -13,7 +14,7 @@ use Yii;
  * @property integer $create_time
  * @property integer $update_time
  */
-class User extends \yii\db\ActiveRecord
+class User extends ActiveRecord
 {
     /**
      * @inheritdoc
@@ -52,8 +53,12 @@ class User extends \yii\db\ActiveRecord
     public function behaviors(){
         return [
             'timestamp' => [
-                'class' => 'yii\behaviors\AutoTimestamp'
+                'class'         => \yii\behaviors\TimestampBehavior::className(),
+                'attributes'    => [
+                    ActiveRecord::EVENT_BEFORE_INSERT => 'creation_time',
+                    ActiveRecord::EVENT_BEFORE_UPDATE => 'update_time',
                 ]
-            ];
+            ]
+        ];
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace app\modules\users;
+namespace modules\users;
 
 class Users extends \yii\base\Module
 {

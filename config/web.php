@@ -1,5 +1,7 @@
 <?php
 
+Yii::setAlias('@modules', dirname(__DIR__) . '/modules');
+
 $params = require(__DIR__ . '/params.php');
 
 $config = [
@@ -8,8 +10,13 @@ $config = [
     'bootstrap' => ['log'],
     'modules'   => [
         'users'     => [
-            'class'     => 'app\modules\users\Users'
+            'class'     => 'modules\users\Users'
         ]
+    ],
+    'controllerMap' => [
+        'fixture' => [
+            'class' => 'yii\faker\FixtureController',
+        ],
     ],
     'components' => [
         'request' => [
